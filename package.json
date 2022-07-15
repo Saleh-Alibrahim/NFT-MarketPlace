@@ -13,7 +13,7 @@
     "deploy:ropsten": "hardhat run scripts/deploy.js --network ropsten",
     "setup-marketplace:localhost": "hardhat run scripts/setupMarket.js --network localhost",
     "setup-marketplace:ropsten": "hardhat run scripts/setupMarket.js --network ropsten",
-    "setup": "npm run deploy:localhost && npm run setup-marketplace:localhost",
+    "setup": "yarn run deploy:localhost && yarn run setup-marketplace:localhost",
     "env": "hardhat run scripts/updateVercelEnviromentKeys.js --network ropsten"
   },
   "dependencies": {
