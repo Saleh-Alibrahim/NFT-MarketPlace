@@ -14,7 +14,8 @@ const contextDefaultValues = {
   nftContract: null,
   isReady: false,
   hasWeb3: false,
-  initializeWeb3: () => {},
+  connectWallet: () => {},
+  disconnectWallet: () => {},
 };
 
 const networkNames: { unknown: string } = {
@@ -46,7 +47,7 @@ const Web3Provider = ({ children }: IWeb3Provider) => {
   //   await getAndSetWeb3ContextWithoutSigner(alchemyProvider);
   // }
 
-  async function initializeWeb3() {
+  async function connectWallet() {
     try {
       if (!window.ethereum) {
         // await initializeWeb3WithoutSigner();
@@ -72,7 +73,7 @@ const Web3Provider = ({ children }: IWeb3Provider) => {
       };
 
       connection.on('accountsChanged', onAccountsChanged);
-      connection.on('chainChanged', initializeWeb3);
+      connection.on('chainChanged', connectWallet);
     } catch (error: any) {
       // initializeWeb3WithoutSigner();
       console.log(error);
@@ -97,6 +98,15 @@ const Web3Provider = ({ children }: IWeb3Provider) => {
         });
       }
     }
+  }
+  async function disconnectWallet() {
+    setHasWeb3(false);
+    setAccount(contextDefaultValues.account);
+    setNetwork(contextDefaultValues.network);
+    setBalance(contextDefaultValues.balance);
+    setMarketplaceContract(contextDefaultValues.marketplaceContract);
+    setNFTContract(contextDefaultValues.nftContract);
+    setIsReady(contextDefaultValues.isReady);
   }
 
   async function getAndSetWeb3ContextWithSigner(provider: ethers.providers.Web3Provider) {
@@ -156,7 +166,8 @@ const Web3Provider = ({ children }: IWeb3Provider) => {
         isReady,
         network,
         balance,
-        initializeWeb3,
+        connectWallet,
+        disconnectWallet,
         hasWeb3,
       }}
     >

@@ -1,14 +1,16 @@
 import { Flex, Box, Menu, MenuButton, HStack, Avatar, VStack, MenuList, MenuItem } from '@chakra-ui/react';
-import React from 'react';
+import React, { useContext } from 'react';
 import { FiChevronDown } from 'react-icons/fi';
 import ConnectedAccountAddress from './ConnectedAccountAddress';
 import Jdenticon from 'react-jdenticon';
+import { Web3Context } from 'src/components/providers/Web3Provider';
 
 interface IConnectedProfile {
   account: string;
 }
 
 const ConnectedProfile = ({ account }: IConnectedProfile) => {
+  const { disconnectWallet } = useContext(Web3Context);
   return (
     <Flex alignItems={'center'}>
       <Menu>
@@ -24,7 +26,7 @@ const ConnectedProfile = ({ account }: IConnectedProfile) => {
           </HStack>
         </MenuButton>
         <MenuList>
-          <MenuItem>Disconnect</MenuItem>
+          <MenuItem onClick={disconnectWallet}>Disconnect</MenuItem>
         </MenuList>
       </Menu>
     </Flex>

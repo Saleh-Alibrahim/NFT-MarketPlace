@@ -142,7 +142,7 @@ interface MobileProps extends FlexProps {
   onOpen: () => void;
 }
 const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
-  const { initializeWeb3, account } = useContext(Web3Context);
+  const { connectWallet, account } = useContext(Web3Context);
 
   return (
     <Flex
