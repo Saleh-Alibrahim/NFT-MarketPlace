@@ -29,6 +29,7 @@ const Home: NextPage = () => {
   if (!network) {
     return <UnsupportedChain />;
   }
+
   return <></>;
 };
 

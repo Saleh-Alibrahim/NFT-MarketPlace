@@ -53,22 +53,27 @@ const Web3Provider = ({ children }: IWeb3Provider) => {
     position: 'top',
   });
 
-  // async function initializeWeb3WithoutSigner() {
-  //   const alchemyProvider = new ethers.providers.AlchemyProvider(80001);
-  //   setHasWeb3(false);
-  //   await getAndSetWeb3ContextWithoutSigner(alchemyProvider);
-  // }
+  useEffect(() => {
+    connectWallet();
+  }, []);
+
+  async function initializeWeb3WithoutSigner() {
+    const alchemyProvider = new ethers.providers.AlchemyProvider(80001);
+    setHasWeb3(false);
+    await getAndSetWeb3ContextWithoutSigner(alchemyProvider);
+  }
 
   async function connectWallet() {
     try {
       if (!window.ethereum) {
-        // await initializeWeb3WithoutSigner();
+        await initializeWeb3WithoutSigner();
         return;
       }
 
       let onAccountsChangedCooldown = false;
       const web3Modal = new Web3Modal();
       const connection = await web3Modal.connect();
+
       setHasWeb3(true);
       const provider = new ethers.providers.Web3Provider(connection, 'any');
       await getAndSetWeb3ContextWithSigner(provider);
@@ -112,6 +117,7 @@ const Web3Provider = ({ children }: IWeb3Provider) => {
     }
   }
   async function disconnectWallet() {
+    const web3Modal = new Web3Modal();
     setHasWeb3(false);
     setAccount(contextDefaultValues.account);
     setNetwork(contextDefaultValues.network);
@@ -119,6 +125,7 @@ const Web3Provider = ({ children }: IWeb3Provider) => {
     setMarketplaceContract(contextDefaultValues.marketplaceContract);
     setNFTContract(contextDefaultValues.nftContract);
     setIsReady(contextDefaultValues.isReady);
+    await web3Modal.clearCachedProvider();
   }
 
   async function getAndSetWeb3ContextWithSigner(provider: ethers.providers.Web3Provider) {
