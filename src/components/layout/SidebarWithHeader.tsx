@@ -64,9 +64,9 @@ export default function SidebarWithHeader({ children }: { children: ReactNode })
       </Drawer>
       {/* mobilenav */}
       <MobileNav onOpen={onOpen} />
-      <Box ml={{ base: 0, md: 60 }} p='4'>
+      <Flex ml={{ base: 0, md: 60 }} minH='90vh'>
         {children}
-      </Box>
+      </Flex>
     </Box>
   );
 }
@@ -78,7 +78,6 @@ interface SidebarProps extends BoxProps {
 const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
   return (
     <Box
-      transition='3s ease'
       bg={useColorModeValue('white', 'gray.900')}
       borderRight='1px'
       borderRightColor={useColorModeValue('gray.200', 'gray.700')}
@@ -88,8 +87,8 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
       {...rest}
     >
       <Flex h='20' alignItems='center' mx='8' justifyContent='space-between'>
-        <Text fontSize='x-large' fontFamily='monospace' fontWeight='bold'>
-          NFT Marketplace
+        <Text fontSize='2rem' fontFamily='monospace' fontWeight='bold'>
+          NFT
         </Text>
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
@@ -148,7 +147,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
     <Flex
       ml={{ base: 0, md: 60 }}
       px={{ base: 4, md: 4 }}
-      height='20'
+      height='10vh'
       alignItems='center'
       bg={useColorModeValue('white', 'gray.900')}
       borderBottomWidth='1px'
@@ -159,7 +158,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
       <IconButton display={{ base: 'flex', md: 'none' }} onClick={onOpen} variant='outline' aria-label='open menu' icon={<FiMenu />} />
 
       <Text display={{ base: 'flex', md: 'none' }} fontSize='2xl' fontFamily='monospace' fontWeight='bold'>
-        Logo
+        NFT
       </Text>
 
       <HStack spacing={{ base: '2', md: '6' }}>

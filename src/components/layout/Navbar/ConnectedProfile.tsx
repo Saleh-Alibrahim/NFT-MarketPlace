@@ -2,6 +2,7 @@ import { Flex, Box, Menu, MenuButton, HStack, Avatar, VStack, MenuList, MenuItem
 import React, { useContext } from 'react';
 import { FiChevronDown } from 'react-icons/fi';
 import ConnectedAccountAddress from './ConnectedAccountAddress';
+// @ts-ignore
 import Jdenticon from 'react-jdenticon';
 import { Web3Context } from 'src/components/providers/Web3Provider';
 

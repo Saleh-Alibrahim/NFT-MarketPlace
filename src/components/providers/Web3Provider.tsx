@@ -6,7 +6,19 @@ import Market from '../../../artifacts/contracts/Marketplace.sol/Marketplace.jso
 import axios from 'axios';
 import { useToast } from '@chakra-ui/react';
 
-const contextDefaultValues = {
+interface IContextDefaultValues {
+  account: string;
+  network: string;
+  balance: number;
+  marketplaceContract: any;
+  nftContract: any;
+  isReady: boolean;
+  hasWeb3: boolean;
+  connectWallet: any;
+  disconnectWallet: any;
+}
+
+const contextDefaultValues: IContextDefaultValues = {
   account: '',
   network: 'localhost',
   balance: 0,
@@ -33,8 +45,8 @@ const Web3Provider = ({ children }: IWeb3Provider) => {
   const [account, setAccount] = useState(contextDefaultValues.account);
   const [network, setNetwork] = useState(contextDefaultValues.network);
   const [balance, setBalance] = useState(contextDefaultValues.balance);
-  const [marketplaceContract, setMarketplaceContract]: [any, any] = useState(contextDefaultValues.marketplaceContract);
-  const [nftContract, setNFTContract]: [any, any] = useState(contextDefaultValues.nftContract);
+  const [marketplaceContract, setMarketplaceContract] = useState(contextDefaultValues.marketplaceContract);
+  const [nftContract, setNFTContract] = useState(contextDefaultValues.nftContract);
   const [isReady, setIsReady] = useState(contextDefaultValues.isReady);
   const toast = useToast({
     duration: 2000,
@@ -151,6 +163,7 @@ const Web3Provider = ({ children }: IWeb3Provider) => {
     }
     const { data } = await axios(`/api/addresses?network=${networkName}`);
     const marketplaceContract = new ethers.Contract(data.marketplaceAddress, Market.abi, signer);
+    console.log(marketplaceContract);
     setMarketplaceContract(marketplaceContract);
     const nftContract = new ethers.Contract(data.nftAddress, NFT.abi, signer);
     setNFTContract(nftContract);
