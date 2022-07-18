@@ -4,6 +4,7 @@ import { ethers } from 'ethers';
 import NFT from '../../../artifacts/contracts/NFT.sol/NFT.json';
 import Market from '../../../artifacts/contracts/Marketplace.sol/Marketplace.json';
 import axios from 'axios';
+import { useToast } from '@chakra-ui/react';
 
 const contextDefaultValues = {
   account: '',
@@ -34,17 +35,21 @@ const Web3Provider = ({ children }: IWeb3Provider) => {
   const [marketplaceContract, setMarketplaceContract]: [any, any] = useState(contextDefaultValues.marketplaceContract);
   const [nftContract, setNFTContract]: [any, any] = useState(contextDefaultValues.nftContract);
   const [isReady, setIsReady] = useState(contextDefaultValues.isReady);
+  const toast = useToast({
+    duration: 2000,
+    position: 'top',
+  });
 
-  async function initializeWeb3WithoutSigner() {
-    const alchemyProvider = new ethers.providers.AlchemyProvider(80001);
-    setHasWeb3(false);
-    await getAndSetWeb3ContextWithoutSigner(alchemyProvider);
-  }
+  // async function initializeWeb3WithoutSigner() {
+  //   const alchemyProvider = new ethers.providers.AlchemyProvider(80001);
+  //   setHasWeb3(false);
+  //   await getAndSetWeb3ContextWithoutSigner(alchemyProvider);
+  // }
 
   async function initializeWeb3() {
     try {
       if (!window.ethereum) {
-        await initializeWeb3WithoutSigner();
+        // await initializeWeb3WithoutSigner();
         return;
       }
 
@@ -68,9 +73,29 @@ const Web3Provider = ({ children }: IWeb3Provider) => {
 
       connection.on('accountsChanged', onAccountsChanged);
       connection.on('chainChanged', initializeWeb3);
-    } catch (error) {
-      initializeWeb3WithoutSigner();
+    } catch (error: any) {
+      // initializeWeb3WithoutSigner();
       console.log(error);
+      if (error.code === 4001) {
+        toast({
+          title: 'Please accept the request',
+          description: 'Please accept the request to connect to your wallet',
+          status: 'error',
+        });
+      }
+      if (error.code === -32002) {
+        toast({
+          title: 'You have already pending request',
+          description: 'Please cancel the pending request to connect to your wallet',
+          status: 'error',
+        });
+      } else {
+        toast({
+          title: 'Please install MetaMask',
+          description: 'Please install MetaMask to connect to your wallet',
+          status: 'error',
+        });
+      }
     }
   }
 
@@ -96,6 +121,8 @@ const Web3Provider = ({ children }: IWeb3Provider) => {
     const signerBalance = await provider.getBalance(address);
     const balanceInEther = ethers.utils.formatEther(signerBalance);
     setBalance(Number(balanceInEther));
+    console.log(address);
+    console.log(balanceInEther);
   }
 
   async function getAndSetNetwork(provider: ethers.providers.Web3Provider | ethers.providers.AlchemyProvider) {
