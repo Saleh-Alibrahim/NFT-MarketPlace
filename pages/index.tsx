@@ -35,7 +35,7 @@ const Home: NextPage = () => {
           <Spinner width='20rem' height='20rem' thickness='20px' speed='0.8s' emptyColor='gray.300' color='blue.500' size='xl' />
         </Center>
       ) : (
-        <Wrap spacing={10} padding='3rem'>
+        <Wrap spacing={10} p='5'>
           {nfts.map((nft) => (
             <NFTItem key={nft.tokenId.toString()} nftUrl={nft.image} price={nft.price} id={nft.tokenId.toString()} />
           ))}
