@@ -1,3 +1,4 @@
+import { Flex } from '@chakra-ui/react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
@@ -26,11 +27,11 @@ const Home: NextPage = () => {
     setIsLoading(false);
   };
 
-  if (!network) {
-    return <UnsupportedChain />;
-  }
+  // if (!network) {
+  //   return <UnsupportedChain />;
+  // }
 
-  return <></>;
+  return <Flex width='100vh' height='100%' backgroundColor='red.100'></Flex>;
 };
 
 export default Home;
