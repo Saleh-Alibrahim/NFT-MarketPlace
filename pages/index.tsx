@@ -23,13 +23,10 @@ const Home: NextPage = () => {
     console.log('marketplaceContract ' + data);
     const items = await Promise.all(data.map(mapAvailableMarketItems(nftContract)));
     console.log('items ', items);
+    console.log('items[0].marketItemId', items[0].marketItemId);
     setNfts(items);
     setIsLoading(false);
   };
-
-  // if (!network) {
-  //   return <UnsupportedChain />;
-  // }
 
   return (
     <>
@@ -39,7 +36,9 @@ const Home: NextPage = () => {
         </Center>
       ) : (
         <Wrap spacing={10} padding='3rem'>
-          <NFTItem nftUrl='' price={17} id='9071' />
+          {nfts.map((nft) => (
+            <NFTItem key={nft.tokenId.toString()} nftUrl={nft.image} price={nft.price} id={nft.tokenId.toString()} />
+          ))}
         </Wrap>
       )}
     </>
