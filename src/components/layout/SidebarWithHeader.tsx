@@ -23,15 +23,14 @@ import {
   MenuList,
   Button,
 } from '@chakra-ui/react';
-import { ColorModeSwitcher } from '../ColorModeSwitcher';
-import { Web3Context } from '../../providers/Web3Provider';
-import ConnectedAccountAddress from '../Navbar/ConnectedAccountAddress';
-import ConnectButton from '../Navbar/ConnectButton';
-import ConnectedProfile from '../Navbar/ConnectedProfile';
-import SidebarContent from './SidebarContent';
+import { ColorModeSwitcher } from './ColorModeSwitcher';
+import { Web3Context } from '../providers/Web3Provider';
+import ConnectedAccountAddress from './Navbar/ConnectedAccountAddress';
+import ConnectButton from './Navbar/ConnectButton';
+import ConnectedProfile from './Navbar/ConnectedProfile';
+import SidebarContent from './Sidebar/SidebarContent';
 import { FiMenu } from 'react-icons/fi';
-import MobileNav from '../Navbar/MobileNav';
-
+import MobileNav from './Navbar/MobileNav';
 
 
 
