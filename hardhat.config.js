@@ -20,6 +20,12 @@ module.exports = {
       url: `https://mainnet.infura.io/v3/${process.env.INFURA_ID}`,
       accounts: [process.env.ACCOUNT_PRIVATE_KEY, process.env.ACCOUNT2_PRIVATE_KEY],
     },
+    mumbai: {
+      url: `https://polygon-mumbai.g.alchemy.com/v2/${process.env.ALCHEMY_KEY}`,
+      accounts: [process.env.ACCOUNT_PRIVATE_KEY, process.env.ACCOUNT2_PRIVATE_KEY],
+      gas: 5500000,
+      gasPrice: 7000000000,
+    },
   },
   solidity: {
     version: '0.8.4',

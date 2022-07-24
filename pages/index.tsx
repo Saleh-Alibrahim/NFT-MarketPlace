@@ -20,8 +20,9 @@ const Home: NextPage = () => {
   const loadNFTs = async () => {
     if (!isReady) return;
     const data = await marketplaceContract!.fetchAvailableMarketItems();
-    console.log(data);
+    console.log('marketplaceContract ' + data);
     const items = await Promise.all(data.map(mapAvailableMarketItems(nftContract)));
+    console.log('items ', items);
     setNfts(items);
     setIsLoading(false);
   };

@@ -15,8 +15,7 @@ contract Marketplace is ReentrancyGuard {
     Counters.Counter private _tokensCanceled;
 
     address payable private owner;
-
-    // Challenge: make this price dynamic according to the current currency price
+ 
     uint256 private listingFee = 0.045 ether;
 
     mapping(uint256 => MarketItem) private marketItemIdToMarketItem;

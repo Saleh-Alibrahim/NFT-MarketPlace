@@ -10,11 +10,11 @@
     "test": "hardhat test",
     "node": "hardhat node",
     "deploy:localhost": "hardhat run scripts/deploy.js --network localhost",
-    "deploy:ropsten": "hardhat run scripts/deploy.js --network ropsten",
+    "deploy:mumbai": "hardhat run scripts/deploy.js --network mumbai",
     "setup-marketplace:localhost": "hardhat run scripts/setupMarket.js --network localhost",
-    "setup-marketplace:ropsten": "hardhat run scripts/setupMarket.js --network ropsten",
+    "setup-marketplace:mumbai": "hardhat run scripts/setupMarket.js --network mumbai",
     "setup": "yarn run deploy:localhost && yarn run setup-marketplace:localhost",
-    "env": "hardhat run scripts/updateVercelEnviromentKeys.js --network ropsten"
+    "env": "hardhat run scripts/updateVercelEnviromentKeys.js --network mumbai"
   },
   "dependencies": {
     "@chakra-ui/icons": "^2.0.4",
