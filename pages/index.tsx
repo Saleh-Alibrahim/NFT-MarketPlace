@@ -10,7 +10,7 @@ import { mapAvailableMarketItems } from '../src/utils/nft';
 const Home: NextPage = () => {
   const [nfts, setNfts]: [any[], any] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const { marketplaceContract, nftContract, isReady, network } = useContext(Web3Context);
+  const { marketplaceContract, nftContract, isReady } = useContext(Web3Context);
 
   useEffect(() => {
     loadNFTs();

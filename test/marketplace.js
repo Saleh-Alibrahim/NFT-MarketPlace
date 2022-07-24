@@ -1,6 +1,6 @@
-import { expect } from 'chai';
-import { ethers } from 'hardhat';
-import { BigNumber } from 'ethers';
+const { expect } = require('chai');
+const { ethers } = require('hardhat');
+const { BigNumber } = require('ethers');
 
 describe('Marketplace', function () {
   let nftContract;
